@@ -12,10 +12,30 @@ const { title } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta
+			name="description"
+			content="Panorama Tab - Browser extension to replace your new tab"
+		/>
+		<meta
+			name="keywords"
+			content="Browser, New Tab, Reddit, Weather, Information, Holidays"
+		/>
+		<meta name="author" content="Lukas Nabholz" />
+
+		<meta property="og:title" content="Panorama Tab" />
+		<meta
+			property="og:description"
+			content="Browser extension to replace your new tab"
+		/>
+		<meta
+			property="og:image"
+			content="https://panoramatab.netlify.app/images/big-mosaic.png"
+		/>
+		<meta property="og:url" content="https://panoramatab.netlify.app/" />
+		<meta property="og:type" content="website" />
+
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="stylesheet" href="" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
