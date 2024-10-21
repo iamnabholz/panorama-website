@@ -1,0 +1,51 @@
+---
+import GetButton from "./GetButton.astro";
+---
+
+<header class="row-wrapper">
+  <a href="/" class="row-wrapper">
+    <img alt="Panorama Tab Logo" src="/favicon.svg" />
+    <h1>Panorama Tab</h1>
+  </a>
+  <GetButton />
+</header>
+
+<style>
+  header {
+    padding: 2rem 0;
+    justify-content: space-between;
+  }
+
+  .row-wrapper {
+    align-items: center;
+    gap: 12px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  img {
+    height: 4rem;
+    width: auto;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  @media only screen and (max-width: 640px) {
+    header {
+      flex-direction: column;
+    }
+
+    a {
+      flex-direction: column;
+    }
+  }
+</style>

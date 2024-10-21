@@ -1,0 +1,61 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Slideshow from "../components/Slideshow.astro";
+import GetButton from "../components/GetButton.astro";
+---
+
+<Layout title="Panorama Tab">
+	<Header />
+
+	<Slideshow />
+
+	<div class="column-wrapper">
+		<p>
+			Panorama Tab replaces your browser new tab with a unique design and set of
+			features that you can customize to fit your style.
+		</p>
+
+		<GetButton />
+
+		<a
+			href="https://www.producthunt.com/products/panorama-tab?utm_source=badge-follow&utm_medium=badge&utm_souce=badge-panorama-tab"
+			target="_blank"
+		>
+			<img
+				src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=499769&theme=light"
+				alt="Panorama Tab - Replace your browser new tab with a more custom experience | Product Hunt"
+				style="width: 250px; height: 54px;"
+				width="250"
+				height="54"
+			/>
+		</a>
+		<a href="https://www.buymeacoffee.com/nabholz" target="_blank">
+			<img
+				src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+				alt="Buy Me A Coffee"
+				style="height: 60px !important;width: 217px !important;"
+			/>
+		</a>
+	</div>
+
+	<Footer />
+</Layout>
+
+<style>
+	.column-wrapper {
+		padding: 4vh 0;
+		text-align: center;
+		line-height: 1.2;
+		margin: auto;
+		align-items: center;
+		width: min(820px, 100%);
+		gap: 2rem;
+	}
+
+	p {
+		font-size: 1.4rem;
+	}
+</style>
