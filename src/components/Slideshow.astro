@@ -1,5 +1,9 @@
 <div class="showcase">
-  <img id="image-showcase" src="images/screenshots/screenshot-1.webp" />
+  <img
+    alt="Showcased screenshot of Panorama Tab"
+    id="image-showcase"
+    src="images/screenshots/screenshot-1.webp"
+  />
 </div>
 
 <div class="thumbnails">
@@ -56,6 +60,16 @@
     // Set an interval to change the image every few seconds
     let slideshowInterval = setInterval(showNextImage, intervalTime);
 
+    bigImage.addEventListener("click", function (event) {
+      // Stop automatic slideshow on manual click
+      clearInterval(slideshowInterval);
+
+      showNextImage();
+
+      // Restart the slideshow after a click
+      slideshowInterval = setInterval(showNextImage, intervalTime);
+    });
+
     // Add click event listeners to thumbnails
     thumbnails.forEach(function (thumb, index) {
       thumb.addEventListener("click", function (event) {
@@ -89,7 +103,6 @@
   }
 
   .slide {
-    cursor: pointer;
     transition: all 150ms linear;
   }
 
@@ -98,6 +111,7 @@
   }
 
   img {
+    cursor: pointer;
     border-radius: 4px;
   }
 </style>
