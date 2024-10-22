@@ -1,17 +1,28 @@
 ---
 import GetButton from "./GetButton.astro";
+import favicon from "../assets/favicon.svg?raw";
 ---
 
-<header class="row-wrapper">
-  <a href="/" class="row-wrapper">
-    <img alt="Panorama Tab Logo" src="/favicon.svg" />
-    <h1>Panorama Tab</h1>
-  </a>
-  <GetButton />
-</header>
+<div class="header-container">
+  <header class="row-wrapper">
+    <a href="/" class="row-wrapper">
+      <div class="svg-icon">
+        <Fragment set:html={favicon} />
+      </div>
+      <h1>Panorama Tab</h1>
+    </a>
+    <GetButton />
+  </header>
+</div>
 
 <style>
+  .header-container {
+    height: 40vh;
+  }
+
   header {
+    position: sticky;
+    top: 0;
     padding: 2rem 0;
     justify-content: space-between;
   }
@@ -30,9 +41,9 @@ import GetButton from "./GetButton.astro";
     text-decoration: none;
   }
 
-  img {
-    height: 4rem;
-    width: auto;
+  .svg-icon {
+    height: 64px;
+    width: 64px;
   }
 
   h1 {
@@ -44,8 +55,17 @@ import GetButton from "./GetButton.astro";
       flex-direction: column;
     }
 
+    .header-container {
+      height: 50vh;
+    }
+
     a {
       flex-direction: column;
+    }
+
+    .svg-icon {
+      height: 96px;
+      width: 96px;
     }
   }
 </style>

@@ -1,18 +1,25 @@
+---
+import { Image } from "astro:assets";
+import chrome from "../assets/chrome.svg";
+import firefox from "../assets/firefox.svg";
+import edge from "../assets/edge.svg";
+---
+
 <section class="column-wrapper">
   <p>Available on</p>
   <div class="row-wrapper links">
     <a
       href="https://chrome.google.com/webstore/detail/panorama-tab/einjlbiknhpkccefknpcnmnmmnhigcbc"
     >
-      <img alt="Chrome Browser Logo" src="images/chrome.svg" />
+      <Image alt="Chrome Browser Logo" src={chrome} loading="eager" />
     </a>
     <a
       href="https://microsoftedge.microsoft.com/addons/detail/panorama-tab/pfpebaokeeiinfhcklkomfbdejpfaoke"
     >
-      <img alt="Firefox Browser Logo" src="images/firefox.svg" />
+      <Image alt="Firefox Browser Logo" src={firefox} loading="eager" />
     </a>
     <a href="https://addons.mozilla.org/addon/panorama-tab/">
-      <img alt="Edge Browser Logo" src="images/edge.svg" />
+      <Image alt="Edge Browser Logo" src={edge} loading="eager" />
     </a>
   </div>
 </section>
@@ -31,8 +38,8 @@
   }
 
   img {
-    height: 2.6rem;
-    width: 2.6rem;
+    height: 44px;
+    width: 44px;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
   }
 

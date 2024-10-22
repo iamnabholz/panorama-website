@@ -1,49 +1,103 @@
-<div class="screenshots">
-  <div class="slide">
-    <img
-      src="images/screenshots/screenshot-1.webp"
-      class="screenshot-img"
-      alt="New Tab Screenshots"
-    />
-  </div>
-  <div class="slide">
-    <img
-      src="images/screenshots/screenshot-2.webp"
-      class="screenshot-img"
-      alt="New Tab Screenshots"
-    />
-  </div>
-  <div class="slide">
-    <img
-      src="images/screenshots/screenshot-3.webp"
-      class="screenshot-img"
-      alt="New Tab Screenshots"
-    />
-  </div>
-  <div class="slide">
-    <img
-      src="images/screenshots/screenshot-4.webp"
-      class="screenshot-img"
-      alt="New Tab Screenshots"
-    />
-  </div>
+<div class="showcase">
+  <img id="image-showcase" src="images/screenshots/screenshot-1.webp" />
 </div>
 
+<div class="thumbnails">
+  <img
+    src="images/screenshots/screenshot-1.webp"
+    class="slide"
+    alt="New Tab Screenshots"
+  />
+  <img
+    src="images/screenshots/screenshot-2.webp"
+    class="slide"
+    alt="New Tab Screenshots"
+  />
+  <img
+    src="images/screenshots/screenshot-3.webp"
+    class="slide"
+    alt="New Tab Screenshots"
+  />
+  <img
+    src="images/screenshots/screenshot-4.webp"
+    class="slide"
+    alt="New Tab Screenshots"
+  />
+  <img
+    src="images/screenshots/screenshot-5.webp"
+    class="slide"
+    alt="New Tab Screenshots"
+  />
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const bigImage = document.getElementById(
+      "image-showcase",
+    ) as HTMLImageElement;
+    const thumbnails = document.querySelectorAll(".slide");
+
+    let currentIndex = 0;
+    const totalImages = thumbnails.length;
+    const intervalTime = 6000; // 3 seconds
+
+    const changeImage = (imageSrc: string) => {
+      bigImage.src = imageSrc;
+    };
+
+    const showNextImage = () => {
+      currentIndex = (currentIndex + 1) % totalImages;
+      const nextImage = thumbnails[currentIndex] as HTMLImageElement;
+      if (nextImage && nextImage.src) {
+        changeImage(nextImage.src);
+      }
+    };
+
+    // Set an interval to change the image every few seconds
+    let slideshowInterval = setInterval(showNextImage, intervalTime);
+
+    // Add click event listeners to thumbnails
+    thumbnails.forEach(function (thumb, index) {
+      thumb.addEventListener("click", function (event) {
+        // Stop automatic slideshow on manual click
+        clearInterval(slideshowInterval);
+
+        const target = event.target as HTMLImageElement;
+        if (target && target.src) {
+          changeImage(target.src);
+          currentIndex = index;
+        }
+
+        // Restart the slideshow after a click
+        slideshowInterval = setInterval(showNextImage, intervalTime * 1.7);
+      });
+    });
+  });
+</script>
+
 <style>
-  .screenshots {
+  .showcase {
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.6));
+  }
+
+  .thumbnails {
+    padding-top: 1rem;
+    padding-bottom: 4rem;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(auto, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
   }
 
-  .slide img {
-    border-radius: 4px;
+  .slide {
+    cursor: pointer;
+    transition: all 150ms linear;
   }
 
-  @media only screen and (max-width: 640px) {
-    .screenshots {
-      grid-template-columns: 1fr;
-    }
+  .slide:hover {
+    opacity: 0.6;
+  }
+
+  img {
+    border-radius: 4px;
   }
 </style>

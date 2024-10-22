@@ -5,6 +5,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Slideshow from "../components/Slideshow.astro";
 import GetButton from "../components/GetButton.astro";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Panorama Tab">
@@ -24,7 +25,7 @@ import GetButton from "../components/GetButton.astro";
 			href="https://www.producthunt.com/products/panorama-tab?utm_source=badge-follow&utm_medium=badge&utm_souce=badge-panorama-tab"
 			target="_blank"
 		>
-			<img
+			<Image
 				src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=499769&theme=light"
 				alt="Panorama Tab - Replace your browser new tab with a more custom experience | Product Hunt"
 				style="width: 250px; height: 54px;"
@@ -33,10 +34,12 @@ import GetButton from "../components/GetButton.astro";
 			/>
 		</a>
 		<a href="https://www.buymeacoffee.com/nabholz" target="_blank">
-			<img
+			<Image
 				src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
 				alt="Buy Me A Coffee"
 				style="height: 60px !important;width: 217px !important;"
+				height="60"
+				width="217"
 			/>
 		</a>
 	</div>
