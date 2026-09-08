@@ -1,19 +1,35 @@
 {
   "name": "Panorama Tab",
   "short_name": "Panorama",
+  "description": "A dynamic new tab page with custom backgrounds, weather, holidays, and more — fast, private, and fully local.",
+
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+
+  "background_color": "#0c0c0c",
+  "theme_color": "#0c0c0c",
+
   "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" },
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "/icon-192-maskable.png",
+      "type": "image/png",
       "sizes": "192x192",
-      "type": "image/png"
+      "purpose": "maskable"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "src": "/icon-512-maskable.png",
+      "type": "image/png",
       "sizes": "512x512",
-      "type": "image/png"
+      "purpose": "maskable"
     }
   ],
-  "theme_color": "#0f0f0f",
-  "background_color": "#0f0f0f",
-  "display": "standalone"
+
+  "categories": ["productivity", "utilities", "personalization"],
+
+  "lang": "en",
+  "dir": "ltr"
 }

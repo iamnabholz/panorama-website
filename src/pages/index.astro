@@ -1,64 +1,149 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import Slideshow from "../components/Slideshow.astro";
 import GetButton from "../components/GetButton.astro";
 import { Image } from "astro:assets";
 ---
 
-<Layout title="Panorama Tab">
-	<Header />
+<Layout>
+    <section class="hero">
+        <a href="/" class="row logo">
+            <svg
+                class="icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    d="M4 3h16v2H4zm0 16h6v2H4zM2 5h2v14H2zm18 0h2v8h-2zM6 7h2v2H6zm4 0h2v2h-2zm4 0h2v2h-2zm2 6h2v2h-2zm0 8h2v2h-2zm-4-4h2v2h-2zm8 0h2v2h-2zm-6-2h2v2h-2zm4 0h2v2h-2zm0 4h2v2h-2zm-4 0h2v2h-2z"
+                    fill="currentColor"></path>
+            </svg>
+            <span style="margin-top: 4px;">Panorama Tab</span>
+        </a>
+        <br />
+        <br />
+        <h1>Your new tab.<br />Actually yours.</h1>
+        <p class="dek muted">
+            Swap your browsers default new tab page for something calmer and
+            built to fit your style, with a simple summary of the day for your
+            location, and beautiful customizable backgrounds.
+        </p>
+        <GetButton />
+    </section>
 
-	<Slideshow />
+    <Slideshow />
 
-	<div class="column-wrapper">
-		<p>
-			Panorama Tab replaces your browser new tab with a unique design and set of
-			features that you can customize to fit your style.
-		</p>
+    <section class="row support-section">
+        <a
+            href="https://www.producthunt.com/products/panorama-tab/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-panorama-tab"
+            target="_blank"
+            class="badge-link"
+        >
+            <Image
+                src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=499769&theme=light"
+                alt="Panorama Tab - New tab you'll open just to see what today looks like | Product Hunt"
+                style="width: 250px; height: 54px;"
+                width="250"
+                height="54"
+            />
+        </a>
+        <a
+            href="https://www.buymeacoffee.com/nabholz"
+            target="_blank"
+            class="badge-link"
+        >
+            <Image
+                src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                alt="Buy Me A Coffee"
+                width="217"
+                height="60"
+                style="width: 250px; height: 54px;"
+            />
+        </a>
+    </section>
 
-		<GetButton />
-
-		<a
-			href="https://www.producthunt.com/products/panorama-tab?utm_source=badge-follow&utm_medium=badge&utm_souce=badge-panorama-tab"
-			target="_blank"
-		>
-			<Image
-				src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=499769&theme=light"
-				alt="Panorama Tab - Replace your browser new tab with a more custom experience | Product Hunt"
-				style="width: 250px; height: 54px;"
-				width="250"
-				height="54"
-			/>
-		</a>
-		<a href="https://www.buymeacoffee.com/nabholz" target="_blank">
-			<Image
-				src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-				alt="Buy Me A Coffee"
-				style="height: 60px !important;width: 217px !important;"
-				height="60"
-				width="217"
-			/>
-		</a>
-	</div>
-
-	<Footer />
+    <footer class="row">
+        <a href="/">Panorama Tab</a>
+        <a
+            href="https://app.notion.com/p/nabholz/Panorama-Tab-Privacy-Policy-3cc1169905be80589a79cdba1840f806"
+        >
+            Privacy Policy
+        </a>
+        <a href="https://nabholz.work">Lukas Nabholz</a>
+    </footer>
 </Layout>
 
 <style>
-	.column-wrapper {
-		padding: 4vh 0;
-		text-align: center;
-		line-height: 1.2;
-		margin: auto;
-		align-items: center;
-		width: min(820px, 100%);
-		gap: 2rem;
-	}
+    .logo {
+        gap: 10px;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
 
-	p {
-		font-size: 1.4rem;
-	}
+    .icon {
+        height: 26px;
+        width: 26px;
+        color: var(--text-color);
+    }
+
+    .hero {
+        max-width: var(--max-width);
+        margin: 10vh auto 7vh;
+        text-align: left;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.75rem, 7vw, 4.5rem);
+        margin-bottom: 1.25rem;
+    }
+
+    .hero h1 br {
+        display: block;
+    }
+
+    .dek {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        max-width: 42ch;
+        margin-bottom: 2rem;
+    }
+
+    .support-section {
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        padding: 6vh 0 4vh;
+    }
+
+    .badge-link :global(img) {
+        object-fit: contain;
+    }
+
+    footer {
+        justify-content: space-between;
+        font-size: 0.9rem;
+        margin-top: 3rem;
+        padding: 1.5rem 0 3rem;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-muted);
+    }
+
+    footer a:hover {
+        color: var(--text-color);
+    }
+
+    @media only screen and (max-width: 640px) {
+        header {
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .hero {
+            text-align: left;
+        }
+
+        footer {
+            flex-direction: column;
+            gap: 12px;
+        }
+    }
 </style>

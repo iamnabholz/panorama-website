@@ -3,58 +3,58 @@ import { Image } from "astro:assets";
 import chrome from "../assets/chrome.svg";
 import firefox from "../assets/firefox.svg";
 import edge from "../assets/edge.svg";
+
+const browsers = [
+    {
+        name: "Chrome",
+        icon: chrome,
+        href: "https://chrome.google.com/webstore/detail/panorama-tab/einjlbiknhpkccefknpcnmnmmnhigcbc",
+    },
+    {
+        name: "Firefox",
+        icon: firefox,
+        href: "https://addons.mozilla.org/addon/panorama-tab/",
+    },
+    {
+        name: "Edge",
+        icon: edge,
+        href: "https://microsoftedge.microsoft.com/addons/detail/panorama-tab/pfpebaokeeiinfhcklkomfbdejpfaoke",
+    },
+];
 ---
 
-<section class="column-wrapper">
-  <p>Available on</p>
-  <div class="row-wrapper links">
-    <a
-      href="https://chrome.google.com/webstore/detail/panorama-tab/einjlbiknhpkccefknpcnmnmmnhigcbc"
-    >
-      <Image alt="Chrome Browser Logo" src={chrome} loading="eager" />
-    </a>
-    <a
-      href="https://microsoftedge.microsoft.com/addons/detail/panorama-tab/pfpebaokeeiinfhcklkomfbdejpfaoke"
-    >
-      <Image alt="Firefox Browser Logo" src={firefox} loading="eager" />
-    </a>
-    <a href="https://addons.mozilla.org/addon/panorama-tab/">
-      <Image alt="Edge Browser Logo" src={edge} loading="eager" />
-    </a>
-  </div>
+<section>
+    <p class="muted">Available on</p>
+    <div class="row">
+        {
+            browsers.map(({ name, icon, href }) => (
+                <a href={href}>
+                    <Image
+                        alt={`${name} Browser Logo`}
+                        src={icon}
+                        width={44}
+                        height={44}
+                        loading="eager"
+                    />
+                </a>
+            ))
+        }
+    </div>
 </section>
 
 <style>
-  section {
-    width: fit-content;
-  }
+    img {
+        height: 44px;
+        width: 44px;
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+    }
 
-  a img {
-    transition: transform 150ms ease-out;
-  }
+    .row {
+        gap: 6px;
+    }
 
-  a:hover img {
-    transform: scale(1.1);
-  }
-
-  img {
-    height: 44px;
-    width: 44px;
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
-  }
-
-  .links {
-    gap: 12px;
-  }
-
-  .column-wrapper {
-    align-items: center;
-    gap: 6px;
-  }
-
-  p {
-    cursor: default;
-    font-size: 0.8rem;
-    opacity: 0.8;
-  }
+    .muted {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
 </style>

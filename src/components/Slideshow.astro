@@ -1,117 +1,96 @@
-<div class="showcase">
-  <img
-    alt="Showcased screenshot of Panorama Tab"
-    id="image-showcase"
-    src="images/screenshots/screenshot-1.webp"
-  />
-</div>
+---
+import { Image } from "astro:assets";
+import screenshot1 from "../assets/screenshots/screenshot-1.webp";
+import screenshot2 from "../assets/screenshots/screenshot-2.webp";
+import screenshot3 from "../assets/screenshots/screenshot-3.webp";
+import screenshot4 from "../assets/screenshots/screenshot-4.webp";
 
+const slides = [screenshot1, screenshot2, screenshot3, screenshot4];
+---
+
+<div class="showcase">
+    <Image
+        src={slides[0]}
+        alt="Showcased screenshot of Panorama Tab"
+        id="image-showcase"
+        loading={"eager"}
+    />
+</div>
 <div class="thumbnails">
-  <img
-    src="images/screenshots/screenshot-1.webp"
-    class="slide"
-    alt="New Tab Screenshots"
-  />
-  <img
-    src="images/screenshots/screenshot-2.webp"
-    class="slide"
-    alt="New Tab Screenshots"
-  />
-  <img
-    src="images/screenshots/screenshot-3.webp"
-    class="slide"
-    alt="New Tab Screenshots"
-  />
-  <img
-    src="images/screenshots/screenshot-4.webp"
-    class="slide"
-    alt="New Tab Screenshots"
-  />
-  <img
-    src="images/screenshots/screenshot-5.webp"
-    class="slide"
-    alt="New Tab Screenshots"
-  />
+    {
+        slides.map((slide) => (
+            <Image src={slide} class="slide" alt="New Tab Screenshots" />
+        ))
+    }
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const bigImage = document.getElementById(
-      "image-showcase",
-    ) as HTMLImageElement;
-    const thumbnails = document.querySelectorAll(".slide");
+    document.addEventListener("DOMContentLoaded", function () {
+        const bigImage = document.getElementById(
+            "image-showcase",
+        ) as HTMLImageElement;
+        const thumbnails =
+            document.querySelectorAll<HTMLImageElement>(".slide");
+        let currentIndex = 0;
+        const totalImages = thumbnails.length;
+        const intervalTime = 6000;
 
-    let currentIndex = 0;
-    const totalImages = thumbnails.length;
-    const intervalTime = 6000; // 3 seconds
+        const changeImage = (imageSrc: string) => {
+            bigImage.src = imageSrc;
+        };
 
-    const changeImage = (imageSrc: string) => {
-      bigImage.src = imageSrc;
-    };
+        const showNextImage = () => {
+            currentIndex = (currentIndex + 1) % totalImages;
+            const nextImage = thumbnails[currentIndex];
+            if (nextImage && nextImage.src) {
+                changeImage(nextImage.src);
+            }
+        };
 
-    const showNextImage = () => {
-      currentIndex = (currentIndex + 1) % totalImages;
-      const nextImage = thumbnails[currentIndex] as HTMLImageElement;
-      if (nextImage && nextImage.src) {
-        changeImage(nextImage.src);
-      }
-    };
+        let slideshowInterval = setInterval(showNextImage, intervalTime);
 
-    // Set an interval to change the image every few seconds
-    let slideshowInterval = setInterval(showNextImage, intervalTime);
+        bigImage.addEventListener("click", function () {
+            clearInterval(slideshowInterval);
+            showNextImage();
+            slideshowInterval = setInterval(showNextImage, intervalTime);
+        });
 
-    bigImage.addEventListener("click", function (event) {
-      // Stop automatic slideshow on manual click
-      clearInterval(slideshowInterval);
-
-      showNextImage();
-
-      // Restart the slideshow after a click
-      slideshowInterval = setInterval(showNextImage, intervalTime);
+        thumbnails.forEach(function (thumb, index) {
+            thumb.addEventListener("click", function (event) {
+                clearInterval(slideshowInterval);
+                const target = event.target as HTMLImageElement;
+                if (target && target.src) {
+                    changeImage(target.src);
+                    currentIndex = index;
+                }
+                slideshowInterval = setInterval(
+                    showNextImage,
+                    intervalTime * 1.7,
+                );
+            });
+        });
     });
-
-    // Add click event listeners to thumbnails
-    thumbnails.forEach(function (thumb, index) {
-      thumb.addEventListener("click", function (event) {
-        // Stop automatic slideshow on manual click
-        clearInterval(slideshowInterval);
-
-        const target = event.target as HTMLImageElement;
-        if (target && target.src) {
-          changeImage(target.src);
-          currentIndex = index;
-        }
-
-        // Restart the slideshow after a click
-        slideshowInterval = setInterval(showNextImage, intervalTime * 1.7);
-      });
-    });
-  });
 </script>
 
 <style>
-  .showcase {
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.6));
-  }
-
-  .thumbnails {
-    padding-top: 1rem;
-    padding-bottom: 4rem;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
-  }
-
-  .slide {
-    transition: all 150ms linear;
-  }
-
-  .slide:hover {
-    opacity: 0.6;
-  }
-
-  img {
-    cursor: pointer;
-    border-radius: 4px;
-  }
+    .showcase {
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.6));
+    }
+    .thumbnails {
+        padding-top: 12px;
+        padding-bottom: 24px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+    .slide {
+        transition: all 150ms linear;
+    }
+    .slide:hover {
+        opacity: 0.6;
+    }
+    img {
+        cursor: pointer;
+        border-radius: 4px;
+    }
 </style>
