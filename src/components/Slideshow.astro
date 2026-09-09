@@ -8,35 +8,58 @@ import screenshot4 from "../assets/screenshots/screenshot-4.webp";
 const slides = [screenshot1, screenshot2, screenshot3, screenshot4];
 ---
 
-<div class="showcase">
+<div
+    class="showcase"
+    style={`aspect-ratio: ${slides[0].width} / ${slides[0].height}`}
+>
     <Image
         src={slides[0]}
         alt="Showcased screenshot of Panorama Tab"
-        id="image-showcase"
-        loading={"eager"}
+        class="crossfade-img is-active"
+        loading="eager"
+    />
+    <Image
+        src={slides[0]}
+        alt="Showcased screenshot of Panorama Tab"
+        class="crossfade-img"
+        loading="eager"
     />
 </div>
 <div class="thumbnails">
-    {
-        slides.map((slide) => (
-            <Image src={slide} class="slide" alt="New Tab Screenshots" />
-        ))
-    }
+    {slides.map((slide) => (
+        <Image src={slide} class="slide" alt="New Tab Screenshots" />
+    ))}
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const bigImage = document.getElementById(
-            "image-showcase",
-        ) as HTMLImageElement;
+        const showcase = document.querySelector(".showcase") as HTMLElement;
+        const layers =
+            showcase.querySelectorAll<HTMLImageElement>(".crossfade-img");
         const thumbnails =
             document.querySelectorAll<HTMLImageElement>(".slide");
+
+        // warm the cache so a transition never shows a blank frame
+        thumbnails.forEach((thumb) => {
+            const preload = new Image();
+            preload.src = thumb.src;
+        });
+
+        let activeLayer = 0;
         let currentIndex = 0;
         const totalImages = thumbnails.length;
         const intervalTime = 6000;
 
         const changeImage = (imageSrc: string) => {
-            bigImage.src = imageSrc;
+            const nextLayer = activeLayer === 0 ? 1 : 0;
+            const incoming = layers[nextLayer];
+            const outgoing = layers[activeLayer];
+
+            incoming.src = imageSrc;
+            incoming.classList.add("is-active");
+            outgoing.classList.remove("is-active");
+
+            activeLayer = nextLayer;
         };
 
         const showNextImage = () => {
@@ -49,7 +72,7 @@ const slides = [screenshot1, screenshot2, screenshot3, screenshot4];
 
         let slideshowInterval = setInterval(showNextImage, intervalTime);
 
-        bigImage.addEventListener("click", function () {
+        showcase.addEventListener("click", function () {
             clearInterval(slideshowInterval);
             showNextImage();
             slideshowInterval = setInterval(showNextImage, intervalTime);
@@ -74,7 +97,21 @@ const slides = [screenshot1, screenshot2, screenshot3, screenshot4];
 
 <style>
     .showcase {
+        position: relative;
+        width: 100%;
+        cursor: pointer;
         filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.6));
+    }
+    .crossfade-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 500ms ease;
+    }
+    .crossfade-img.is-active {
+        opacity: 1;
     }
     .thumbnails {
         padding-top: 12px;
@@ -87,7 +124,7 @@ const slides = [screenshot1, screenshot2, screenshot3, screenshot4];
         transition: all 150ms linear;
     }
     .slide:hover {
-        opacity: 0.6;
+        opacity: 0.8;
     }
     img {
         cursor: pointer;

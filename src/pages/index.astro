@@ -2,26 +2,23 @@
 import Layout from "../layouts/Layout.astro";
 import Slideshow from "../components/Slideshow.astro";
 import GetButton from "../components/GetButton.astro";
+import Logo from "../components/Logo.astro";
 import { Image } from "astro:assets";
 ---
 
 <Layout>
     <section class="hero">
-        <a href="/" class="row logo">
-            <svg
-                class="icon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-            >
-                <path
-                    d="M4 3h16v2H4zm0 16h6v2H4zM2 5h2v14H2zm18 0h2v8h-2zM6 7h2v2H6zm4 0h2v2h-2zm4 0h2v2h-2zm2 6h2v2h-2zm0 8h2v2h-2zm-4-4h2v2h-2zm8 0h2v2h-2zm-6-2h2v2h-2zm4 0h2v2h-2zm0 4h2v2h-2zm-4 0h2v2h-2z"
-                    fill="currentColor"></path>
-            </svg>
+        <a href="/" class="row name">
+            <Logo />
             <span style="margin-top: 4px;">Panorama Tab</span>
         </a>
         <br />
         <br />
-        <h1>Your new tab.<br />Actually yours.</h1>
+        <h1>
+            Your new tab.
+            <br />
+            Simple. Beautiful.
+        </h1>
         <p class="dek muted">
             Swap your browsers default new tab page for something calmer and
             built to fit your style, with a simple summary of the day for your
@@ -63,9 +60,7 @@ import { Image } from "astro:assets";
 
     <footer class="row">
         <a href="/">Panorama Tab</a>
-        <a
-            href="https://app.notion.com/p/nabholz/Panorama-Tab-Privacy-Policy-3cc1169905be80589a79cdba1840f806"
-        >
+        <a href="https://app.notion.com/p/nabholz/Panorama-Tab-Privacy-Policy-3cc1169905be80589a79cdba1840f806">
             Privacy Policy
         </a>
         <a href="https://nabholz.work">Lukas Nabholz</a>
@@ -73,16 +68,10 @@ import { Image } from "astro:assets";
 </Layout>
 
 <style>
-    .logo {
+    .name {
         gap: 10px;
         font-weight: 700;
         font-size: 1.1rem;
-    }
-
-    .icon {
-        height: 26px;
-        width: 26px;
-        color: var(--text-color);
     }
 
     .hero {
