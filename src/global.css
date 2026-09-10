@@ -77,16 +77,14 @@ a {
     text-decoration: none;
 }
 
-p a,
-footer a {
+p a {
     text-decoration: underline;
     text-decoration-color: var(--border-color);
     text-underline-offset: 3px;
     transition: text-decoration-color 150ms linear;
 }
 
-p a:hover,
-footer a:hover {
+p a:hover {
     text-decoration-color: currentColor;
 }
 

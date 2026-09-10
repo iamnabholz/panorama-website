@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Slideshow from "../components/Slideshow.astro";
 import GetButton from "../components/GetButton.astro";
 import Logo from "../components/Logo.astro";
-import { Image } from "astro:assets";
+import OpenSource from "../components/OpenSource.astro";
 ---
 
 <Layout>
@@ -24,47 +24,36 @@ import { Image } from "astro:assets";
             built to fit your style, with a simple summary of the day for your
             location, and beautiful customizable backgrounds.
         </p>
+
+        <div class="row trust-row muted">
+            <span>Free</span>
+            <span aria-hidden="true">·</span>
+            <span>Open Source</span>
+            <span aria-hidden="true">·</span>
+            <span>Private</span>
+        </div>
+
         <GetButton />
     </section>
 
     <Slideshow />
 
-    <section class="row support-section">
-        <a
-            href="https://www.producthunt.com/products/panorama-tab/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-panorama-tab"
-            target="_blank"
-            class="badge-link"
-        >
-            <Image
-                src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=499769&theme=light"
-                alt="Panorama Tab - New tab you'll open just to see what today looks like | Product Hunt"
-                style="width: 250px; height: 54px;"
-                width="250"
-                height="54"
-            />
-        </a>
-        <a
-            href="https://www.buymeacoffee.com/nabholz"
-            target="_blank"
-            class="badge-link"
-        >
-            <Image
-                src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-                alt="Buy Me A Coffee"
-                width="217"
-                height="60"
-                style="width: 250px; height: 54px;"
-            />
-        </a>
-    </section>
+    <OpenSource />
 
-    <footer class="row">
-        <a href="/">Panorama Tab</a>
-        <a href="https://app.notion.com/p/nabholz/Panorama-Tab-Privacy-Policy-3cc1169905be80589a79cdba1840f806">
-            Privacy Policy
-        </a>
-        <a href="https://nabholz.work">Lukas Nabholz</a>
-    </footer>
+    <section class="stack credits">
+        <span>
+            Built by{" "}
+            <a href="https://nabholz.work/" target="_blank">
+                Lukas Nabholz
+            </a>
+        </span>
+        <span>
+            Help keep it going{" "}
+            <a href="https://www.buymeacoffee.com/nabholz" target="_blank">
+                Buy me a coffee
+            </a>
+        </span>
+    </section>
 </Layout>
 
 <style>
@@ -89,51 +78,39 @@ import { Image } from "astro:assets";
         display: block;
     }
 
+    .trust-row {
+        gap: 10px;
+        font-size: 0.9rem;
+        margin: 2rem 0;
+        font-weight: bold;
+    }
+
     .dek {
         font-size: 1.2rem;
         line-height: 1.5;
         max-width: 42ch;
-        margin-bottom: 2rem;
-    }
-
-    .support-section {
-        align-items: center;
-        justify-content: center;
-        gap: 0.4rem;
-        padding: 6vh 0 4vh;
     }
 
     .badge-link :global(img) {
         object-fit: contain;
     }
 
-    footer {
-        justify-content: space-between;
-        font-size: 0.9rem;
-        margin-top: 3rem;
-        padding: 1.5rem 0 3rem;
-        border-top: 1px solid var(--border-color);
-        color: var(--text-muted);
+    .credits {
+        max-width: var(--max-width);
+        margin: 0 auto 16vh;
+        text-align: left;
+        gap: 1rem;
     }
 
-    footer a:hover {
+    .credits a {
+        text-decoration: underline;
+        text-decoration-color: var(--border-color);
+        text-underline-offset: 4px;
+        transition: text-decoration-color 150ms linear;
+    }
+
+    .credits a:hover {
         color: var(--text-color);
-    }
-
-    @media only screen and (max-width: 640px) {
-        .hero {
-            text-align: left;
-        }
-
-        .support-section {
-            flex-direction: column;
-            gap: 1rem;
-            padding: 4vh 0 2vh;
-        }
-
-        footer {
-            flex-direction: column;
-            gap: 12px;
-        }
+        text-decoration-color: currentColor;
     }
 </style>

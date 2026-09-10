@@ -1,0 +1,61 @@
+<section class="open-source">
+    <div class="stack copy">
+        <h2>Open Source. Fully Transparent.</h2>
+        <p class="muted">
+            Panorama Tab is free and open source. Check out the code, see how it
+            works, or contribute and help make Panorama even better for
+            everyone.
+        </p>
+    </div>
+    <div class="stack links">
+        <a href="https://github.com/nabholz/panorama-tab" target="_blank">
+            View the code on GitHub
+        </a>
+        <a href="https://app.notion.com/p/nabholz/Panorama-Tab-Privacy-Policy-3cc1169905be80589a79cdba1840f806">
+            Privacy policy
+        </a>
+        <a
+            href="https://www.producthunt.com/products/panorama-tab"
+            target="_blank"
+        >
+            Find us on Product Hunt
+        </a>
+    </div>
+</section>
+
+<style>
+    .open-source {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 8vh 0;
+        text-align: left;
+    }
+    .copy {
+        gap: 0.6rem;
+        margin-bottom: 1.75rem;
+    }
+    .copy h2 {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+    .copy p {
+        font-size: 1.05rem;
+        line-height: 1.5;
+        max-width: 48ch;
+    }
+    .links {
+        align-items: flex-start;
+        gap: 0.8rem;
+        font-size: 0.9rem;
+    }
+    .links a {
+        color: var(--text-muted);
+        text-decoration: underline;
+        text-decoration-color: var(--border-color);
+        text-underline-offset: 3px;
+        transition: text-decoration-color 150ms linear;
+    }
+    .links a:hover {
+        color: var(--text-color);
+        text-decoration-color: currentColor;
+    }
+</style>
