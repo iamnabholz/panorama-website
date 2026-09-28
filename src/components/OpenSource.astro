@@ -1,6 +1,6 @@
 <section class="open-source">
     <div class="stack copy">
-        <h2>Open Source. Fully Transparent.</h2>
+        <h2>Open source.</h2>
         <p class="muted">
             Panorama Tab is free and open source. Check out the code, see how it
             works, or contribute and help make Panorama even better for
@@ -14,51 +14,114 @@
         >
             View the source on GitHub
         </a>
-        <a href="https://app.notion.com/p/nabholz/Panorama-Tab-Privacy-Policy-3cc1169905be80589a79cdba1840f806">
-            Privacy policy
-        </a>
+
         <a
             href="https://www.producthunt.com/products/panorama-tab"
             target="_blank"
         >
-            Panorama Tab on Product Hunt
+            Review on Product Hunt
         </a>
+    </div>
+
+    <div class="credits">
+        <p>
+            Built by{" "}
+            <a
+                href="https://nabholz.work/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Lukas Nabholz
+            </a>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xml:space="preserve"
+                fill-rule="evenodd"
+                stroke-linejoin="round"
+                stroke-miterlimit="2"
+                clip-rule="evenodd"
+                viewBox="0 0 32 32"
+            >
+                <path
+                    fill="#fcc010"
+                    d="M6.13 23.8 4.42 5.5a5 5 0 0 1 8.18-4.3l14.1 11.78a5 5 0 0 1-.87 8.27l-.45.23.94 1.77a5 5 0 0 1-2.1 6.75l-2.66 1.4a5 5 0 0 1-6.75-2.1l-.93-1.77-.44.23a5 5 0 0 1-7.3-3.96"
+                />
+                <path d="m10.11 23.43-1.7-18.3a1 1 0 0 1 1.63-.87l14.1 11.8a1 1 0 0 1-.17 1.65l-3.99 2.09 2.8 5.31a1 1 0 0 1-.43 1.35l-2.65 1.4a1 1 0 0 1-1.35-.42l-2.8-5.31-3.98 2.09a1 1 0 0 1-1.46-.8m1.86-1.68 3.54-1.86a1 1 0 0 1 1.35.42l2.8 5.31.88-.46-2.8-5.32a1 1 0 0 1 .43-1.35l3.54-1.86-11.1-9.28z" />
+            </svg>
+        </p>
+
+        <p>
+            Help keep it going,{" "}
+            <a
+                href="https://www.buymeacoffee.com/nabholz"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Buy Me A Coffee
+            </a>
+        </p>
     </div>
 </section>
 
 <style>
     .open-source {
-        max-width: var(--max-width);
         margin: 0 auto;
-        padding: 8vh 0;
-        text-align: left;
+        padding: clamp(3rem, 7vw, 6rem) 1.5rem;
+        border-block: 1px solid var(--color-border);
+        background: radial-gradient(
+            ellipse at 50% 100%,
+            color-mix(in srgb, var(--color-brand-yellow) 7%, transparent),
+            transparent 70%
+        );
+        text-align: center;
     }
+
     .copy {
-        gap: 0.6rem;
+        display: grid;
+        justify-items: center;
+        gap: 1.5rem;
         margin-bottom: 1.75rem;
     }
     .copy h2 {
-        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-size: clamp(2.25rem, 5vw, 4.25rem);
     }
-    .copy p {
+    .copy .muted {
+        color: var(--color-text-muted);
         font-size: 1.05rem;
         line-height: 1.5;
         max-width: 48ch;
     }
     .links {
-        align-items: flex-start;
-        gap: 0.8rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem 2rem;
         font-size: 0.9rem;
     }
     .links a {
-        color: var(--text-muted);
+        color: var(--color-text-muted);
         text-decoration: underline;
-        text-decoration-color: var(--border-color);
+        text-decoration-color: var(--color-border-strong);
         text-underline-offset: 3px;
         transition: text-decoration-color 150ms linear;
     }
     .links a:hover {
-        color: var(--text-color);
+        color: var(--color-text);
         text-decoration-color: currentColor;
+    }
+
+    .credits {
+        font-size: 2rem;
+        padding-top: 6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .credits svg {
+        display: inline-block;
+        height: 1em;
+        transform: scale(1.6) translate(8px, 4px);
     }
 </style>

@@ -23,38 +23,222 @@ const browsers = [
 ];
 ---
 
-<section>
-    <p class="muted">Available on</p>
-    <div class="row">
-        {
-            browsers.map(({ name, icon, href }) => (
-                <a href={href}>
-                    <Image
-                        alt={`${name} Browser Logo`}
-                        src={icon}
-                        width={44}
-                        height={44}
-                        loading="eager"
-                    />
-                </a>
-            ))
-        }
-    </div>
-</section>
+<div class="get-button" data-get-button>
+    <a class="primary" data-primary hidden>
+        <span data-primary-label></span>
+        <span aria-hidden="true">&rarr;</span>
+    </a>
+    <p class="availability" data-availability>
+        Made for desktop. Open in Chrome, Firefox, or Edge to install.
+    </p>
+    <nav class="stores" aria-label="Desktop extension stores">
+        {browsers.map(({ name, icon, href }) => (
+            <a class="store" href={href} data-browser={name}>
+                <Image
+                    alt=""
+                    src={icon}
+                    width={24}
+                    height={24}
+                    loading="eager"
+                />
+                <span>{name}</span>
+            </a>
+        ))}
+    </nav>
+</div>
+
+<script>
+    function detectDesktopBrowser({
+        userAgent = "",
+        mobile = false,
+        maxTouchPoints = 0,
+        brave = false,
+        brands = [],
+    }: {
+        userAgent?: string;
+        mobile?: boolean;
+        maxTouchPoints?: number;
+        brave?: boolean;
+        brands?: { brand: string }[];
+    }): "Chrome" | "Firefox" | "Edge" | null {
+        if (
+            mobile ||
+            /Android|Mobile|Tablet|iPhone|iPad|iPod|CriOS|FxiOS|EdgiOS|EdgA|Windows Phone|Silk\//i.test(
+                userAgent,
+            ) ||
+            (/Macintosh/i.test(userAgent) && maxTouchPoints > 1)
+        )
+            return null;
+
+        if (
+            brave ||
+            /Opera|OPR\/|OPiOS|SamsungBrowser|Brave|Vivaldi|YaBrowser|Yowser|DuckDuckGo|UCBrowser|UCWEB|Whale|Puffin|SeaMonkey/i.test(
+                userAgent,
+            ) ||
+            brands.some(({ brand }) =>
+                /Opera|Samsung|Brave|Vivaldi|Yandex|DuckDuckGo|Whale/i.test(
+                    brand,
+                ),
+            )
+        )
+            return null;
+
+        if (!/Windows NT|Macintosh|X11|CrOS|Linux/i.test(userAgent))
+            return null;
+
+        if (/Edg\/\d+/.test(userAgent)) return "Edge";
+        if (/Firefox\/\d+/.test(userAgent)) return "Firefox";
+        if (/Chrome\/\d+/.test(userAgent)) return "Chrome";
+        return null;
+    }
+
+    function enhanceStoreLinks() {
+        const browserNavigator = navigator as Navigator & {
+            brave?: unknown;
+            userAgentData?: {
+                mobile?: boolean;
+                brands?: { brand: string }[];
+            };
+        };
+        const browser = detectDesktopBrowser({
+            userAgent: browserNavigator.userAgent,
+            maxTouchPoints: browserNavigator.maxTouchPoints,
+            mobile: browserNavigator.userAgentData?.mobile,
+            brands: browserNavigator.userAgentData?.brands,
+            brave: "brave" in browserNavigator,
+        });
+
+        document
+            .querySelectorAll<HTMLElement>("[data-get-button]")
+            .forEach((root) => {
+                const primary =
+                    root.querySelector<HTMLAnchorElement>("[data-primary]");
+                const label = root.querySelector<HTMLElement>(
+                    "[data-primary-label]",
+                );
+                const availability = root.querySelector<HTMLElement>(
+                    "[data-availability]",
+                );
+                const store = browser
+                    ? root.querySelector<HTMLAnchorElement>(
+                          `[data-browser="${browser}"]`,
+                      )
+                    : null;
+                if (!primary || !label || !availability || !store) return;
+
+                primary.href = store.href;
+                label.textContent = `Get on ${browser}`;
+                availability.textContent = "Available for desktop.";
+                primary.hidden = false;
+            });
+    }
+
+    enhanceStoreLinks();
+    document.addEventListener("astro:page-load", enhanceStoreLinks);
+</script>
 
 <style>
-    img {
-        height: 44px;
-        width: 44px;
-        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+    .get-button {
+        display: grid;
+        justify-items: center;
+        gap: var(--space-4);
+        width: 100%;
+        text-align: center;
     }
 
-    .row {
-        gap: 6px;
+    .primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-4);
+        padding: var(--space-2) var(--space-4);
+        box-sizing: border-box;
+        border: 1px solid
+            color-mix(in srgb, var(--color-accent), var(--color-text) 15%);
+        border-radius: var(--radius-lg);
+        background: var(--color-accent);
+        color: var(--color-on-brand);
+        box-shadow: 0 6px 24px
+            color-mix(in srgb, var(--color-accent) 18%, transparent);
+        font-size: 1.2rem;
+        font-weight: var(--fw-bold);
+        text-decoration: none;
+        transition:
+            transform var(--duration-fast),
+            box-shadow var(--duration-fast);
     }
 
-    .muted {
-        font-size: 1rem;
-        margin-bottom: 8px;
+    .primary[hidden] {
+        display: none;
+    }
+
+    .availability {
+        max-width: 42ch;
+        margin: 0;
+        color: var(--color-text-muted);
+        font-size: var(--fs-sm);
+        line-height: 1.6;
+        text-wrap: balance;
+    }
+
+    .stores {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--space-2);
+    }
+
+    .store {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-2);
+        min-height: 44px;
+        box-sizing: border-box;
+        padding: var(--space-2) var(--space-4);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-full);
+        background: var(--color-surface);
+        color: var(--color-text);
+        font-size: var(--fs-sm);
+        text-decoration: none;
+        transition:
+            border-color var(--duration-fast),
+            background-color var(--duration-fast);
+    }
+
+    .store img {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+    }
+
+    .get-button a:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 4px;
+    }
+
+    @media (hover: hover) {
+        .primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px
+                color-mix(in srgb, var(--color-accent) 28%, transparent);
+        }
+
+        .store:hover {
+            border-color: var(--color-accent);
+            background: color-mix(
+                in srgb,
+                var(--color-accent) 8%,
+                var(--color-surface)
+            );
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .get-button a {
+            transition: none;
+            transform: none;
+        }
     }
 </style>

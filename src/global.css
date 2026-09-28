@@ -1,126 +1,300 @@
 :root {
-    --light-color: #f1f1f1;
-    --lighter-color: #cecece;
-    --dark-color: #303030;
-    --darker-color: #0f0f0f;
-    --text-color: var(--light-color);
-    --text-muted: #8a8a86;
-    --background-color: var(--darker-color);
-    --accent: #ff5a1f;
-    --border-color: #ffffff1f;
-    --radius: 8px;
-    --max-width: 640px;
+    --color-background: #11110f;
+    --color-surface: #191917;
 
-    color-scheme: light dark;
-    line-height: 1;
-    color: var(--text-color);
-    background-color: var(--background-color);
-    font-family: "PP Sans Rounded", system-ui, sans-serif;
+    --color-text: #f4f2eb;
+    --color-text-muted: #aaa79f;
+
+    --color-border: rgb(255 255 255 / 0.12);
+    --color-border-strong: rgb(255 255 255 / 0.3);
+
+    --color-brand-pink: #ff0052;
+    --color-brand-yellow: #ffd400;
+    --color-brand-cyan: #00d2ff;
+
+    --color-accent: var(--color-brand-pink);
+    --color-on-brand: #11110f;
+
+    /*
+     * Typography
+     */
+    --font-sans:
+        "PP Sans Rounded", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+
+    --fw-regular: 400;
+    --fw-semibold: 700;
+    --fw-bold: 700;
+
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-md: 1.125rem;
+    --fs-lg: 1.25rem;
+    --fs-xl: 1.5rem;
+    --fs-2xl: clamp(2rem, 7vw, 3.5rem);
+
+    /*
+     * Spacing
+     */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-24: 6rem;
+
+    /*
+     * Layout
+     */
+    --content-width: 76rem;
+    --text-width: 65ch;
+    --page-gutter: 1.25rem;
+
+    /*
+     * Shape
+     */
+    --radius-sm: 0.375rem;
+    --radius: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-full: 999px;
+
+    /*
+     * Effects
+     */
+    --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.12);
+    --shadow-md: 0 8px 24px rgb(0 0 0 / 0.18);
+
+    /*
+     * Motion
+     */
+    --duration-fast: 120ms;
+    --duration-normal: 200ms;
+
+    --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /*
+     * Browser defaults
+     */
+    color-scheme: dark;
+
+    font-family: var(--font-sans);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-regular);
+    line-height: 1.5;
+    color: var(--color-text);
+    background-color: var(--color-background);
+
     font-synthesis: none;
     text-rendering: optimizeLegibility;
+    font-kerning: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        --text-color: var(--darker-color);
-        --text-muted: #6b6b68;
-        --background-color: var(--light-color);
-        --border-color: #00000018;
+        --color-background: #f4f2ed;
+        --color-surface: #ebe9e3;
+
+        --color-text: #1b1b19;
+        --color-text-muted: #6d6b65;
+
+        --color-border: rgb(0 0 0 / 0.12);
+        --color-border-strong: rgb(0 0 0 / 0.3);
+
+        --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.06);
+        --shadow-md: 0 8px 24px rgb(0 0 0 / 0.1);
+
+        color-scheme: light;
     }
 }
 
 @font-face {
     font-family: "PP Sans Rounded";
-    src: url("../fonts/PPPangramSansRounded-Bold.otf") format("opentype");
-    font-weight: 700;
+    src: url("/fonts/PPPangramSansRounded-Medium.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
     font-display: swap;
 }
+
 @font-face {
     font-family: "PP Sans Rounded";
-    src: url("../fonts/PPPangramSansRounded-Medium.otf") format("opentype");
-    font-weight: 400;
+    src: url("/fonts/PPPangramSansRounded-Bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
     font-display: swap;
 }
+
+/*
+ * Reset
+ */
 
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    border: none;
-    outline: none;
     box-sizing: border-box;
 }
 
+html {
+    min-height: 100%;
+    background: var(--color-background);
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
 body {
-    font-size: 18px;
+    min-height: 100svh;
+    margin: 0;
+    background:
+        radial-gradient(
+            ellipse 55% 40rem at 20% 12rem,
+            color-mix(in srgb, var(--color-brand-pink) 7%, transparent),
+            transparent
+        ),
+        radial-gradient(
+            ellipse 55% 40rem at 85% 30rem,
+            color-mix(in srgb, var(--color-brand-cyan) 7%, transparent),
+            transparent
+        ),
+        var(--color-background);
 }
 
-h1,
-h2 {
-    line-height: 1.05;
-    font-weight: 700;
-    letter-spacing: -0.03em;
+body,
+button {
+    font: inherit;
 }
 
-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+button {
+    color: inherit;
+    border: 0;
+}
+
+button:not(:disabled),
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+img,
+svg,
+video {
     display: block;
+    max-width: 100%;
+}
+
+img,
+video {
+    height: auto;
+}
+
+svg {
+    width: auto;
+    height: auto;
+}
+
+button,
+a {
+    touch-action: manipulation;
 }
 
 a {
     color: inherit;
-    text-decoration: none;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
 }
 
-p a {
-    text-decoration: underline;
-    text-decoration-color: var(--border-color);
-    text-underline-offset: 3px;
-    transition: text-decoration-color 150ms linear;
+p,
+h1,
+h2,
+h3,
+ul,
+ol,
+figure,
+blockquote {
+    margin: 0;
 }
 
-p a:hover {
-    text-decoration-color: currentColor;
+h1,
+h2,
+h3 {
+    font-weight: var(--fw-bold);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+}
+
+p,
+li {
+    text-wrap: pretty;
 }
 
 button,
-.button {
+[role="button"] {
+    cursor: pointer;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
+
+    min-height: 2.75rem;
+    padding: 0.7rem 1.4rem;
+
+    border: 2px solid var(--color-text);
     border-radius: var(--radius);
-    border: 2px solid var(--text-color);
-    padding: 0.7em 1.4em;
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: inherit;
-    color: var(--background-color);
-    background-color: var(--text-color);
-    cursor: pointer;
-    transition: 200ms ease;
+
+    font-weight: var(--fw-bold);
+    color: var(--color-background);
+    background-color: var(--color-text);
+
+    text-decoration: none;
+
+    transition:
+        box-shadow var(--duration-normal) var(--ease-standard),
+        background-color var(--duration-normal) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard);
 }
 
-button:hover,
-.button:hover {
-    box-shadow: 0 0 0 4px var(--border-color);
+button:disabled {
+    opacity: 0.5;
+    cursor: default;
 }
 
-.stack {
-    display: flex;
-    flex-direction: column;
+@media (hover: hover) {
+    button:not(:disabled):hover,
+    .button:hover {
+        box-shadow: 0 0 0 4px var(--color-border);
+    }
 }
 
-.row {
-    display: flex;
-    align-items: center;
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
 }
 
-.muted {
-    color: var(--text-muted);
+a {
+    text-decoration-color: var(--color-border-strong);
+    transition: text-decoration-color var(--duration-fast) linear;
+}
+
+a:hover {
+    text-decoration-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
