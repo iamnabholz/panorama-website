@@ -5,43 +5,59 @@ import "../global.css";
 const SITE_TITLE = "Panorama Tab — Your new tab. Simple. Beautiful.";
 const SITE_DESCRIPTION =
     "Panorama Tab is a calmer, customizable browser new tab page with useful daily information and beautiful backgrounds.";
+
+const siteURL = Astro.site;
+
+if (!siteURL) {
+    throw new Error("Set the production site URL in astro.config.mjs.");
+}
+
+const canonicalURL = new URL(Astro.url.pathname, siteURL);
+const socialImageURL = new URL("/big_cover.png", siteURL);
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        <title>{SITE_TITLE}</title>
         <meta name="description" content={SITE_DESCRIPTION} />
         <meta name="author" content="Lukas Nabholz" />
         <meta name="generator" content={Astro.generator} />
 
+        <link rel="canonical" href={canonicalURL.href} />
+
+        <meta name="robots" content="max-image-preview:large" />
+
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Panorama Tab" />
+        <meta property="og:locale" content="en_US" />
         <meta property="og:title" content={SITE_TITLE} />
         <meta property="og:description" content={SITE_DESCRIPTION} />
+        <meta property="og:url" content={canonicalURL.href} />
+        <meta property="og:image" content={socialImageURL.href} />
+        <meta property="og:image:type" content="image/png" />
         <meta
-            property="og:image"
-            content="https://panoramatab.netlify.app/big_cover.png"
+            property="og:image:alt"
+            content="Panorama Tab — a customizable browser new tab page"
         />
-        <meta property="og:url" content="https://panoramatab.netlify.app/" />
-        <meta property="og:site_name" content="Panorama Tab" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={SITE_TITLE} />
         <meta name="twitter:description" content={SITE_DESCRIPTION} />
+        <meta name="twitter:image" content={socialImageURL.href} />
         <meta
-            name="twitter:image"
-            content="https://panoramatab.netlify.app/big_cover.png"
+            name="twitter:image:alt"
+            content="Panorama Tab — a customizable browser new tab page"
         />
 
+        <meta name="color-scheme" content="light dark" />
         <meta name="theme-color" content="#FFD400" />
 
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-        <title>{SITE_TITLE}</title>
     </head>
 
     <body>

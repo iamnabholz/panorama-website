@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://panorama.nabholz.work/sitemap.xml
